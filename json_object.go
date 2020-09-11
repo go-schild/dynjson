@@ -21,6 +21,13 @@ func ParseObject(jsonString string) (JsonObject, error) {
 	return obj, nil
 }
 
+// ToString returns the JSON data as string.
+// Returns an empty string, when an error occurred.
+func (j JsonObject) ToString() string {
+	data, _ := json.Marshal(&j)
+	return string(data)
+}
+
 // Has checks if a json object contains a specific field.
 func (j JsonObject) Has(field string) bool {
 	_, ok := j[field]
@@ -170,8 +177,8 @@ func (j JsonObject) SetList(field string, value JsonList) {
 // SetNumber writes an integer or float into the json object.
 // Json doesn't know types like "float64" or "int". Numbers are handled like "float64".
 // The Get methods converts the number to the type you want, like "int".
-func (j JsonObject) SetNumber(field string, value int) {
-	j[field] = float64(value)
+func (j JsonObject) SetNumber(field string, value float64) {
+	j[field] = value
 }
 
 func (j JsonObject) SetString(field, value string) {

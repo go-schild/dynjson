@@ -34,6 +34,13 @@ func ParseList(jsonString string) (JsonList, error) {
 	return NewJsonList(obj), nil
 }
 
+// ToString returns the JSON data as string.
+// Returns an empty string, when an error occurred.
+func (j JsonList) ToString() string {
+	data, _ := json.Marshal(&j)
+	return string(data)
+}
+
 func (j *JsonList) Append(data ...interface{}) {
 	var list []JsonListItem
 
